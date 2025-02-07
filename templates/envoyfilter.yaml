@@ -11,8 +11,8 @@ spec:
       operation: INSERT_FIRST
       value:
         name: "test-redis-cluster-with-istio"
-        connect_timeout: 0.5s
-        lb_policy: CLUSTER_PROVIDED
+        connect_timeout: 3s
+        lb_policy: CLUSTER_PROVIDED  # Use Redis Cluster's builtin partitioning scheme
         load_assignment:
           cluster_name: test-redis-cluster-with-istio
           endpoints:

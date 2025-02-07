@@ -9,8 +9,7 @@ spec:
   - applyTo: NETWORK_FILTER
     match:
       listener:
-        #name: ${REDIS_VIP}_6379               # Replace REDIS_VIP with the cluster IP of "redis-cluster service
-        name: 10.96.41.33_6379
+        name: 127.0.0.1_6380
         filterChain:
           filter:
             name: "envoy.filters.network.tcp_proxy"

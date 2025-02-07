@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: redis-proxy
+spec:
+  egress:
+  - port:
+      number: 6380
+      protocol: REDIS
+      name: egressredis
+    bind: 127.0.0.1
+    captureMode: NONE 
+    hosts:
+    - ./*
+  outboundTrafficPolicy:
+    mode: REGISTRY_ONLY
+  #workloadSelector:
+  #  labels:
+  #    run: redis-client
