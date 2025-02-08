@@ -1,4 +1,4 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1
 kind: Sidecar
 metadata:
   name: redis-proxy
@@ -13,7 +13,16 @@ spec:
     hosts:
     - ./*
   outboundTrafficPolicy:
-    mode: REGISTRY_ONLY
+    mode: ALLOW_ANY
   workloadSelector:  # Want this to apply to application instances only, not to Redis Cluster instances
     labels:
       run: redis-client 
+---
+apiVersion: networking.istio.io/v1
+kind: Sidecar
+metadata:
+  name: trafficpolicy
+spec:
+  outboundTrafficPolicy:
+    mode: ALLOW_ANY
+

@@ -1,5 +1,7 @@
 redis-cluster:
-  usePassword: false
   cluster:
     nodes: 9
     replicas: 2
+  password: secret
+  usePassword: true
+

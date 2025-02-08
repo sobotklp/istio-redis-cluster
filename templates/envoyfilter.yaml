@@ -5,8 +5,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: test-redis-cluster-with-istio
-#  namespace: istio-system
 spec:
+  workloadSelector:
+    labels:
+      run: redis-client
   configPatches:
   - applyTo: CLUSTER
     patch:
@@ -35,4 +37,9 @@ spec:
               cluster_refresh_timeout: 3s
               redirect_refresh_interval: 5s
               redirect_refresh_threshold: 5
+        typed_extension_protocol_options:
+          envoy.filters.network.redis_proxy:
+            "@type": type.googleapis.com/envoy.extensions.filters.network.redis_proxy.v3.RedisProtocolOptions
+            auth_password:
+              inline_string: secret
 {{- end -}}
